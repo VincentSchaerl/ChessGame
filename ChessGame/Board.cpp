@@ -7,7 +7,7 @@
 // latestMove[0] = ax of latest move, latestMove[1] = ay of latest move, latestMove[2] = bx of latest move, latestMove[3] = by of latest move
 
 // no explicit copy constructor, because the default copy constructor serves the purpose just fine:
-// the board array gets shallow copied, so that the piece objects don't get duplicated (better perfomance),
+// the board array gets shallow copied, so that the piece objects do not get duplicated (better perfomance),
 // but the castlingInformation and latestMove arrays get deep copied, so that there is no corruption of the original values
 Board::Board(const Color& playerColor)
 {

@@ -237,20 +237,16 @@ void printBoard(const Board& board)
 
 void printInstructions(const Color& playerColor)
 {
-	string blackPiecesOwner;
-	string whitePiecesOwner;
 	if (playerColor == black)
 	{
-		blackPiecesOwner = "player";
-		whitePiecesOwner = "computer";
+		cout << "White pieces (computer):    \"B\" = Bishop, \"K\" = King, \"N\" = Night, \"P\" = Pawn, \"Q\" = Queen, \"R\" = Rook    <- upper case\n";
+		cout << "Black pieces (player):      \"b\" = Bishop, \"k\" = King, \"n\" = Night, \"p\" = Pawn, \"q\" = Queen, \"r\" = Rook    <- lower case\n\n";
 	}
 	else
 	{
-		blackPiecesOwner = "computer";
-		whitePiecesOwner = "player";
+		cout << "Black pieces (computer):    \"b\" = Bishop, \"k\" = King, \"n\" = Night, \"p\" = Pawn, \"q\" = Queen, \"r\" = Rook    <- lower case\n";
+		cout << "White pieces (player):      \"B\" = Bishop, \"K\" = King, \"N\" = Night, \"P\" = Pawn, \"Q\" = Queen, \"R\" = Rook    <- upper case\n\n";
 	}
-	cout << "Black pieces (" << blackPiecesOwner << "):    \"b\" = Bishop, \"k\" = King, \"n\" = Night, \"p\" = Pawn, \"q\" = Queen, \"r\" = Rook    <- lower case\n";
-	cout << "White pieces (" << whitePiecesOwner << "):      \"B\" = Bishop, \"K\" = King, \"N\" = Night, \"P\" = Pawn, \"Q\" = Queen, \"R\" = Rook    <- upper case\n\n";
 	cout << "Declare a move as follows: \"[position of piece to be moved] [position of destination]\"\n";
 	cout << "Examples: \"e2 e4\", \"B1 C3\"\n\n";
 }

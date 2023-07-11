@@ -5,11 +5,11 @@
 class Board
 {
 public:
-// variables
+	// variables
 	Piece* board[9][9];
 	bool castlingInformation[6];
 	int latestMove[4];
-// functions
+	// functions
 	Board(const Color& playerColor);
 	void clear();
 	void setLatestMove(const Move& latestMove);

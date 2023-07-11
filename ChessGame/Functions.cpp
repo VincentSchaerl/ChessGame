@@ -25,7 +25,7 @@ const double QUEEN_VALUE = 9;
 vector<Move> checkMoves(const Board& board, const Color& movingColor)
 {
 	vector<Move> tempMoves;
-	// adds all "physically" possible moves to "tempMoves"
+	// adds all "physically" possible moves to tempMoves
 	for (int i = 1; i <= 8; ++i)
 	{
 		for (int j = 1; j <= 8; ++j)
@@ -38,7 +38,7 @@ vector<Move> checkMoves(const Board& board, const Color& movingColor)
 		}
 	}
 	vector<Move> moves;
-	// checks which of these moves are legal in terms of check and adds them to "moves"
+	// checks which of these moves are legal in terms of check and adds them to moves
 	for (vector<Move>::iterator it = tempMoves.begin(); it != tempMoves.end(); ++it)
 	{
 		Board tempBoard = board;
@@ -47,7 +47,7 @@ vector<Move> checkMoves(const Board& board, const Color& movingColor)
 		{
 			moves.push_back(*it);
 		}
-		// if move (*it) is of type 3 (= promotion), the queen created by movePiece() has to be deleted
+		// if move (*it) is of type 3 (= promotion), the queen created by movePiece has to be deleted
 		if (it->type == 3)
 		{
 			delete tempBoard.board[it->bx][it->by];
@@ -57,7 +57,7 @@ vector<Move> checkMoves(const Board& board, const Color& movingColor)
 }
 
 // 0 = game goes on, 1 = black wins, 2 = white wins, 3 = remis
-// "movingColor" is the color that makes the next move
+// movingColor is the color that makes the next move
 int checkStatus(const Board& board, const Color& movingColor)
 {
 	if (movingColor == white && isCheckmateOrStalemate(board, white) == 1)
@@ -76,7 +76,7 @@ int checkStatus(const Board& board, const Color& movingColor)
 }
 
 // if the highest value of all moves = HIGHEST_POSSIBLE_VALUE, i.e. it checkmates the player, this move gets chosen
-// otherwise all moves with a value greater than or euqal the highest value - RANGE_OF_MOVE_VALUES get added to "bestMoves" and one of them gets randomly chosen
+// otherwise all moves with a value greater than or equal the highest value - RANGE_OF_MOVE_VALUES get added to bestMoves and one of them gets randomly chosen
 Move chooseMove(vector<Move>& moves)
 {
 	double highestValue = LOWEST_POSSIBLE_MOVE_VALUE;
@@ -103,11 +103,11 @@ Move chooseMove(vector<Move>& moves)
 	return bestMoves[rand() % bestMoves.size()];
 }
 
-// checks if the king of the color "color" is in check
+// checks if the king with the color "color" is in check
 bool isCheck(const Board& board, const Color& color)
 {
 	vector<Move> enemyMoves;
-	// adds all "physically" possible moves of the enemy color to "enemyMoves"
+	// adds all "physically" possible moves of the enemy color to enemyMoves
 	for (int i = 1; i <= 8; ++i)
 	{
 		for (int j = 1; j <= 8; ++j)
@@ -115,7 +115,7 @@ bool isCheck(const Board& board, const Color& color)
 			if (board.board[i][j] != nullptr && board.board[i][j]->color != color)
 			{
 				const int position[2] = { i, j };
-				// checkCastling = false, because otherwise checkMoves() and isCheck() could call each other endlessly
+				// checkCastling = false, because otherwise checkMoves and isCheck could call each other endlessly
 				board.board[i][j]->checkMoves(board, false, enemyMoves, position);
 			}
 		}
@@ -132,7 +132,7 @@ bool isCheck(const Board& board, const Color& color)
 }
 
 // 0 = neither checkmate nor stalemate, 1 = checkmate, 2 = stalemate
-// "movingColor" is the color that makes the next move, i.e. the color of the king to be checked if it is checkmated or stalemated
+// movingColor is the color that makes the next move, i.e. the color of the king to be checked if it is checkmated or stalemated
 int isCheckmateOrStalemate(const Board& board, const Color& movingColor)
 {
 	// moves = all possible and legal moves
@@ -221,13 +221,15 @@ void movePiece(Board& board, bool isTemp, const Move& move)
 		// rook A
 		if (bx == 3)
 		{
-			// isTemp = true because there is no possibility of capture (-> delete) or promotion (-> new) and movePiece() gets also called if calling function movePiece() got called with isTremp = true
+			// isTemp = true because there is no possibility of capture (-> delete) or promotion (-> new)
+			// and movePiece gets also called if calling function movePiece got called with isTremp = true
 			movePiece(board, true, Move(1, by, 4, by));
 		}
 		// rook H
 		else
 		{
-			// isTemp = true because there is no possibility of capture (-> delete) or promotion (-> new) and movePiece() gets also called if calling function movePiece() got called with isTremp = true
+			// isTemp = true because there is no possibility of capture (-> delete) or promotion (-> new)
+			// and movePiece gets also called if calling function movePiece got called with isTremp = true
 			movePiece(board, true, Move(8, by, 6, by));
 		}
 	}
@@ -328,7 +330,7 @@ void movePlayer(Board& board, const Color& playerColor)
 		cout << ", capturing " << stringToLowerCase(colorToString(oppositeColor(playerColor))) << " " << charToClassName(board.board[bx][by]->getChar());
 	}
 	cout << "\n\n";
-	// promotion: movePiece() -> inputPromotion()
+	// promotion: movePiece -> inputPromotion
 	movePiece(board, false, move);
 }
 
@@ -412,8 +414,8 @@ int scoreBoard(const Board& board, const Color& playerColor)
 	return points;
 }
 
-// assigns a value to every move of "moves"
-// "movingColor" is the color that makes the next move (one of vector "moves")
+// assigns a value to every move of moves
+// movingColor is the color that makes the next move (one of vector moves)
 void scoreMoves(const Board& board, const int iterations, vector<Move>& moves, const Color& movingColor, const Color& playerColor)
 {
 	for (vector<Move>::iterator it = moves.begin(); it != moves.end(); ++it)
@@ -456,7 +458,7 @@ void scoreMoves(const Board& board, const int iterations, vector<Move>& moves, c
 		{
 			it->setValue(0);
 		}
-		// if move (*it) is of type 3 (= promotion), the queen created by movePiece() has to be deleted
+		// if move (*it) is of type 3 (= promotion), the queen created by movePiece has to be deleted
 		if (it->type == 3)
 		{
 			delete tempBoard.board[it->bx][it->by];

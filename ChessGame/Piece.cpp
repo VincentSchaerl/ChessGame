@@ -90,7 +90,7 @@ char Rook::getChar()
 	}
 }
 
-// adds all "physically" possible moves to "moves", including moves that are not legal in terms of check
+// adds all "physically" possible moves to moves, including moves that are not legal in terms of check
 void Bishop::checkMoves(const Board& board, bool checkCastling, vector<Move>& moves, const int* const position)
 {
 	const int x = position[0];
@@ -102,19 +102,19 @@ void Bishop::checkMoves(const Board& board, bool checkCastling, vector<Move>& mo
 			int i = 1;
 			while (x + i * dx >= 1 && x + i * dx <= 8 && y + i * dy >= 1 && y + i * dy <= 8)
 			{
-				// next square is empty
+				// square is empty
 				if (board.board[x + i * dx][y + i * dy] == nullptr)
 				{
 					moves.push_back(Move(x, y, x + i * dx, y + i * dy));
 					++i;
 				}
-				// next square is occupied by enemy piece
+				// square is occupied by enemy piece
 				else if (color != board.board[x + i * dx][y + i * dy]->color)
 				{
 					moves.push_back(Move(x, y, x + i * dx, y + i * dy));
 					break;
 				}
-				// next square is occupied by piece of own color
+				// square is occupied by piece with same color
 				else
 				{
 					break;
@@ -125,7 +125,7 @@ void Bishop::checkMoves(const Board& board, bool checkCastling, vector<Move>& mo
 }
 
 // adds all "physically" possible moves to "moves", including moves that are not legal in terms of check
-// if checkCastling is false, this method does not check for castling moves, since otherwise checkMoves() and isCheck() could call each other endlessly
+// if checkCastling is false, this function does not check for castling moves, since otherwise checkMoves and isCheck could call each other endlessly
 void King::checkMoves(const Board& board, bool checkCastling, vector<Move>& moves, const int* const position)
 {
 	const int x = position[0];
@@ -382,7 +382,7 @@ void Queen::checkMoves(const Board& board, bool checkCastling, vector<Move>& mov
 				int i = 1;
 				while (x + i * dx >= 1 && x + i * dx <= 8 && y + i * dy >= 1 && y + i * dy <= 8)
 				{
-					// next square is empty
+					// square is empty
 					if (board.board[x + i * dx][y + i * dy] == nullptr)
 					{
 						moves.push_back(Move(x, y, x + i * dx, y + i * dy));
@@ -394,7 +394,7 @@ void Queen::checkMoves(const Board& board, bool checkCastling, vector<Move>& mov
 						moves.push_back(Move(x, y, x + i * dx, y + i * dy));
 						break;
 					}
-					// square is occupied by piece of own color
+					// square is occupied by piece with same color
 					else
 					{
 						break;
@@ -430,7 +430,7 @@ void Rook::checkMoves(const Board& board, bool checkCastling, vector<Move>& move
 			}
 			else
 			{
-				// square is occupied by piece of own color
+				// square is occupied by piece with same color
 				break;
 			}
 		}
@@ -455,7 +455,7 @@ void Rook::checkMoves(const Board& board, bool checkCastling, vector<Move>& move
 			}
 			else
 			{
-				// square is occupied by piece of own color
+				// square is occupied by piece with same color
 				break;
 			}
 		}
